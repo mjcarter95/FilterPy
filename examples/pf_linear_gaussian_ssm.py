@@ -11,7 +11,6 @@ sns.set_style("whitegrid")
 
 # Hyperparameters
 T = 200
-D = 1
 H = np.array([[1.0]])
 R = np.array([[1.0]])
 F = np.array([[1.0]])
@@ -37,12 +36,12 @@ N = 2000
 pf = BasicParticleFilter(N, transition_model, measurement_model)
 
 # Initialise the state and state covariance
-x_sim = np.zeros((T + 1, N, D))
-y_sim = np.zeros((T + 1, N, D))
+x_sim = np.zeros((T + 1, N, 1))
+y_sim = np.zeros((T + 1, N, 1))
 logw = np.zeros((T + 1, N))
 
 # Set the initial state and state covariance
-x_sim[0, :, :] = np.random.multivariate_normal(np.zeros(D), np.eye(D), N)
+x_sim[0, :, :] = np.random.multivariate_normal(np.zeros(1), np.eye(1), N)
 for i in range(N):
     y_sim[0, i, :] = measurement_model.measure(x_sim[0, i, :])
 logw[0, :] = measurement_model.lpdf(x_sim[0], y[0])
@@ -53,8 +52,8 @@ for t in tqdm(range(0, T)):
     x_sim[t+1], y_sim[t+1], logw[t+1] = pf.update(x_pred, y_pred, logw[t], y[t])
 
 # Estimate the state and observation sequences
-x_hat = np.zeros((T, D))
-y_hat = np.zeros((T, D))
+x_hat = np.zeros((T, 1))
+y_hat = np.zeros((T, 1))
 for t in range(T):
     x_hat[t] = np.mean(x_sim[t+1], axis=0)
     y_hat[t] = np.mean(y_sim[t+1], axis=0)

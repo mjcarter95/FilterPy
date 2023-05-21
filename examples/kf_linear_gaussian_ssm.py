@@ -9,7 +9,6 @@ sns.set_style("whitegrid")
 
 # Hyperparameters
 T = 200
-D = 1
 H = np.array([[1.0]])
 R = np.array([[1.0]])
 F = np.array([[1.0]])
@@ -34,11 +33,11 @@ plt.savefig("lgssm.png")
 kf = BasicKalmanFilter(transition_model, measurement_model)
 
 # Initialise the state and state covariance
-x_hat = np.zeros((T, D))
-P = np.zeros((T, D))
+x_hat = np.zeros((T, 1))
+P = np.zeros((T, 1))
 
 # Set the initial state and state covariance
-x_hat[0] = np.random.multivariate_normal(np.zeros(D), np.eye(D))
+x_hat[0] = np.random.multivariate_normal(np.zeros(1), np.eye(1))
 P[0] = np.array([[0.5]]])
 
 # Run the Kalman filter

@@ -8,7 +8,6 @@ from filterpy.models import nearly_constant_vm as ncvm
 sns.set_style("whitegrid")
 
 # Hyperparameters
-# Initialize models
 transition_model = ncvm.TransitionModel(dt=0.1, q=np.diag([0.01, 0.01]))
 measurement_model = ncvm.MeasurementModel(r=0.1)
 
