@@ -3,32 +3,32 @@ import numpy as np
 
 class TransitionModel():
     def __init__(self, F, Q):
-        self.F = F  # State transition matrix
-        self.Q = Q  # State covariance matrix
+        self.mean = F  # State transition matrix
+        self.cov = Q  # State covariance matrix
 
     def predict(self, x):
         """
         Predict the state at time t + 1.
         """
-        return self.F @ x + np.random.normal(0, np.sqrt(self.Q))
+        return self.mean @ x + np.random.normal(0, np.sqrt(self.cov))
 
 
 class MeasurementModel():
     def __init__(self, H, R):
-        self.H = H  # Observation matrix
-        self.R = R  # Measurement covariance matrix
+        self.mean = H  # Observation matrix
+        self.cov = R  # Measurement covariance matrix
 
     def measure(self, x):
         """
         Measure the state at time t.
         """
-        return self.H @ x + np.random.normal(0, np.sqrt(self.R))
+        return self.mean @ x + np.random.normal(0, np.sqrt(self.cov))
 
     def lpdf(self, x, y):
         lpdf = np.zeros(x.shape[0])
 
         for i in range(x.shape[0]):
-            lpdf[i] = -0.5 * np.log(2 * np.pi * self.R) - 0.5 * (y - self.H * x[i]) ** 2 / self.R
+            lpdf[i] = -0.5 * np.log(2 * np.pi * self.cov) - 0.5 * (y - self.mean * x[i]) ** 2 / self.cov
         
         return lpdf
 

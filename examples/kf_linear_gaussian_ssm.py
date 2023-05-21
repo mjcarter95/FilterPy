@@ -10,31 +10,27 @@ sns.set_style("whitegrid")
 # Hyperparameters
 T = 200
 D = 1
-H_true = np.array([[1.0]])
-R_true = np.array([[1.0]])
-F_true = np.array([[1.0]])
-Q_true = np.array([[1.0]])
+H = np.array([[1.0]])
+R = np.array([[1.0]])
+F = np.array([[1.0]])
+Q = np.array([[1.0]])
 
 # Instantiate the measurement and observation models
-transition_model = lgssm.TransitionModel(F_true, Q_true)
-measurement_model = lgssm.MeasurementModel(H_true, R_true)
+transition_model = lgssm.TransitionModel(F, Q)
+measurement_model = lgssm.MeasurementModel(H, R)
 
 # Simulate the state and observation sequences
-x, y = lgssm.simulate_data(T, transition_model, measurement_model)
+x_true, y = lgssm.simulate_data(T, transition_model, measurement_model)
 
 # Plot the state and observation sequences as scatter
 fig = plt.figure(figsize=(10, 5))
-plt.plot(x, label="State")
+plt.plot(x_true, label="State")
 plt.plot(y, label="Observation")
 plt.title("Linear Gaussian State Space Model")
 plt.tight_layout()
 plt.savefig("lgssm.png")
 
 # Instantiate the Kalman filter
-H = np.array([[1.0]])
-R = np.array([[1.0]])
-F = np.array([[1.0]])
-Q = np.array([[1.0]])
 kf = BasicKalmanFilter(transition_model, measurement_model)
 
 # Initialise the state and state covariance
@@ -43,7 +39,7 @@ P = np.zeros((T, D))
 
 # Set the initial state and state covariance
 x_hat[0] = np.random.multivariate_normal(np.zeros(D), np.eye(D))
-P[0] = np.abs( np.random.multivariate_normal(np.zeros(D), np.eye(D)) )
+P[0] = np.array([[0.5]]])
 
 # Run the Kalman filter
 for t in range(1, T):
