@@ -10,15 +10,6 @@
 
 FilterPy allows users to filter and track state space models using various Bayesian inference methods.
 
-<!-- 
-## Prerequisites
-
-Before you begin, ensure you have met the following requirements:-->
-<!--- These are just example requirements. Add, duplicate or remove as required --->
-<!-- * You have installed the latest version of `<coding_language/dependency/requirement_1>`
-* You have a `<Windows/Linux/Mac>` machine. State which OS is supported/which is not.
-* You have read `<guide/link/documentation_related_to_project>`. --> 
-
 ## Installing FilterPy
 
 To install FilterPy, follow these steps:
