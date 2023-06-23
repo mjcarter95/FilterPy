@@ -9,6 +9,7 @@
 ![Twitter Follow](https://img.shields.io/twitter/follow/mjcarter955?style=social)
 
 FilterPy allows users to filter and track state space models using various Bayesian inference methods.
+
 <!-- 
 ## Prerequisites
 
@@ -30,7 +31,7 @@ pip install pip@git+https://github.com/mjcarter95/FilterPy.git
 
 A number of example problems are provided in the `examples` folder.
 
-Example: Apply a Kalman Filter to a user-defined linear Gaussian model
+### Example: Linear Gaussian State Space Model
 
 ```
   # Instantiate the measurement and observation models
@@ -69,11 +70,11 @@ To contribute to FilterPy, follow these steps:
 
 Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-## Contributors
+<!-- ## Contributors
 
-Thanks to the following people who have contributed to this project:
+Thanks to the following people who have contributed to this project: -->
 
-* [@mjcarter95](https://github.com/mjcarter95) 📖
+<!-- * [@mjcarter95](https://github.com/mjcarter95) 📖 -->
 <!-- * [@vberaud](https://github.com/vberaud) 🐛 -->
 
 <!-- You might want to consider using something like the [All Contributors](https://github.com/all-contributors/all-contributors) specification and its [emoji key](https://allcontributors.org/docs/en/emoji-key). -->
@@ -87,21 +88,18 @@ We appreciate citations as they let us discover what people have been doing with
 
 To cite FilterPy in publications use:
 
-Carter, M. (2023). FilterPy (1.0.0). https://pypi.org/project/filterpy
+Carter, M. (2023). FilterPy (1.0.0). https://github.com/mjcarter95/FilterPy
 
 Or use the following BibTeX entry:
 
 ```
 @misc{filterpy,
   title = {FilterPy (1.0.0)},
-  author = {Carter, Matthew},
+  author = {Carter, Matthew, Devlin, Lee and Green, Peter},
   year = {2023},
-  month = may,
-  howpublished = {PyPI}
+  month = May,
+  howpublished = {GitHub},
+  url = {https://github.com/mjcarter95/FilterPy}
+
 }
-```
 
-## License
-<!--- If you're not sure which open license to use see https://choosealicense.com/--->
-
-This project uses the following license: [<license_name>](<link>).
