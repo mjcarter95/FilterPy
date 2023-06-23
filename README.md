@@ -1,5 +1,5 @@
 # FilterPy
-### A collection of Bayesian tracking and filtering methods in Numpy 
+### A collection of Bayesian filtering methods in Python using Numpy and Scipy
 
 <!-- tempate https://github.com/scottydocs/README-template.md/blob/master/README.md -->
 ![GitHub repo size](https://img.shields.io/github/repo-size/mjcarter95/FilterPy)
@@ -8,7 +8,8 @@
 ![GitHub forks](https://img.shields.io/github/forks/mjcarter95/FilterPy?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/mjcarter955?style=social)
 
-FilterPy allows users to sample from probability distributions of interest using a Sequential Monte Carlo sampler.
+FilterPy allows users to filter and track state space models using various Bayesian inference methods.
+
 <!-- 
 ## Prerequisites
 
@@ -30,31 +31,31 @@ pip install pip@git+https://github.com/mjcarter95/FilterPy.git
 
 A number of example problems are provided in the `examples` folder.
 
-Example: A random walk SMC sampler can be applied to a user-defined target density as follows
+### Example: Linear Gaussian State Space Model
 
 ```
-    target = Target()
+  # Instantiate the measurement and observation models
+  transition_model = model.TransitionModel(F, Q)
+  measurement_model = model.MeasurementModel(H, R)
 
-    sample_proposal = multivariate_normal(mean=np.zeros(target.dim), cov=np.eye(target.dim))
-    lkernel = ForwardLKernel(target=target)
-    recycling = ESSRecycling(K=K, target=target)
-    momentum_proposal = multivariate_normal(mean=np.zeros(target.dim), cov=np.eye(target.dim))
-    integrator = LeapfrogIntegrator(target=target, step_size=step_size)
-    forward_kernel = RandomWalkProposal(target=target)
+  # Simulate the state and observation sequences
+  x_true, y = lgssm.simulate_data(T, transition_model, measurement_model)
 
-    rw_smcs = RWSMCSampler(
-        K=K,
-        N=N,
-        target=target,
-        forward_kernel=forward_kernel,
-        sample_proposal=sample_proposal,
-        lkernel=None,
-        recycling=recycling,
-        verbose=False,
-        seed=0,
-    )
+  # Instantiate the Kalman filter
+  kf = BasicKalmanFilter(transition_model, measurement_model)
 
-    rw_smcs.sample()
+  # Initialise the state and state covariance
+  x_hat = np.zeros((T, 1))
+  P = np.zeros((T, 1))
+
+  # Set the initial state and state covariance
+  x_hat[0] = np.random.multivariate_normal(np.zeros(1), np.eye(1))
+  P[0] = np.array([[0.5]]])
+
+  # Run the Kalman filter
+  for t in range(1, T):
+      x_pred, P_pred = kf.predict(x_hat[t-1], P[t-1])
+      x_hat[t], P[t] = kf.update(x_pred, P_pred, y[t])
 ```
 
 ## Contributing to FilterPy
@@ -99,8 +100,6 @@ Or use the following BibTeX entry:
   month = May,
   howpublished = {GitHub},
   url = {https://github.com/mjcarter95/FilterPy}
-}
-```
 
-## License
-This project uses the following license: [<license_name>](<link>).
+}
+
