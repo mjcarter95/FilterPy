@@ -86,7 +86,7 @@ Or use the following BibTeX entry:
 ```
 @misc{filterpy,
   title = {FilterPy (1.0.0)},
-  author = {Carter, Matthew, Devlin, Lee and Green, Peter},
+  author = {Carter, Matthew},
   year = {2023},
   month = May,
   howpublished = {GitHub},
