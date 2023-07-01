@@ -38,7 +38,7 @@ P = np.zeros((T, 1))
 
 # Set the initial state and state covariance
 x_hat[0] = np.random.multivariate_normal(np.zeros(1), np.eye(1))
-P[0] = np.array([[0.5]]])
+P[0] = np.array([[0.5]])
 
 # Run the Kalman filter
 for t in range(1, T):
@@ -47,7 +47,7 @@ for t in range(1, T):
 
 # Plot the state and observation sequences
 fig, ax = plt.subplots(1, 1, figsize=(10, 5))
-plt.plot(x, label="State", linestyle="--", alpha=0.5, color="red")
+plt.plot(x_true, label="State", linestyle="--", alpha=0.5, color="red")
 plt.plot(y, label="Observation", linestyle="--", alpha=0.5, color="blue")
 plt.plot(x_hat, label="Estimate", color="black")
 plt.fill_between(
@@ -65,5 +65,5 @@ plt.tight_layout()
 plt.savefig("kalman_filter.png")
 
 # Calculate the mean squared error
-mse = np.mean((x - x_hat) ** 2)
+mse = np.mean((x_true - x_hat) ** 2)
 print(f"Mean Squared Error: {mse:.2f}")
