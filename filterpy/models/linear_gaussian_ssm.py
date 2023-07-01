@@ -33,7 +33,7 @@ class MeasurementModel():
         return lpdf
 
 
-def simulate_data(T, transition_model, measurement_model):
+def simulate_data(T, transition_model, measurement_model, initial_state=None):
     """
     Simulate a linear Gaussian state space model.
     """
@@ -43,7 +43,10 @@ def simulate_data(T, transition_model, measurement_model):
     y = np.zeros((T, 1))
 
     # Set the initial state
-    x[0] = np.random.normal(0, 1)
+    if initial_state:
+        x[0] = initial_state
+    else:
+        x[0] = np.random.normal(0, 1)
     y[0] = measurement_model.measure(x[0])
 
     # Simulate the state and observation sequences
