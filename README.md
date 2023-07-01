@@ -93,6 +93,7 @@ Or use the following BibTeX entry:
   url = {https://github.com/mjcarter95/FilterPy}
 
 }
+```
 
 ## Acknowledgements
 
