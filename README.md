@@ -94,3 +94,6 @@ Or use the following BibTeX entry:
 
 }
 
+## Acknowledgements
+
+The University of Liverpool and IBM Research for co-funding the EPSRC CDT in Distributed Algorithms doctoral project titled Uncertain Heterogeneous Algorithmic Teamwork
