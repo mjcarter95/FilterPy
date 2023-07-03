@@ -60,7 +60,7 @@ class BasicParticleFilter(BaseParticleFilter):
             i_new = np.random.choice(i, self.N, p=wn)
             x_new = x_pred[i_new]
             y_new = y_pred[i_new]
-            logw_new = (np.ones(self.N) * log_likelihood) - self.N
+            logw_new = log_likelihood - np.log(self.N)
         else:
             x_new = x_pred.copy()
             y_new = y_pred.copy()

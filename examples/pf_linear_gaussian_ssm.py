@@ -11,10 +11,10 @@ sns.set_style("whitegrid")
 
 # Hyperparameters
 T = 200
-H = np.array([[1.0]])
-R = np.array([[1.0]])
-F = np.array([[1.0]])
-Q = np.array([[1.0]])
+H = 1.0
+R = 1.0
+F = 1.0
+Q = 1.0
 
 # Instantiate the measurement and observation models
 transition_model = lgssm.TransitionModel(F, Q)
@@ -33,6 +33,8 @@ plt.savefig("lgssm.png")
 
 # Instantiate the Kalman filter
 N = 2000
+transition_model = lgssm.TransitionModel(3.11747382, Q)
+measurement_model = lgssm.MeasurementModel(-1.47071513, R)
 pf = BasicParticleFilter(N, transition_model, measurement_model)
 
 # Initialise the state and state covariance
@@ -45,7 +47,7 @@ log_likelihood = np.zeros((T, N))
 x_sim[0, :, :] = np.random.multivariate_normal(np.zeros(1), np.eye(1), N)
 for i in range(N):
     y_sim[0, i, :] = measurement_model.measure(x_sim[0, i, :])
-logw[0, :] = measurement_model.lpdf(x_sim[0], y[0])
+logw[0, :] = measurement_model.lpdf(x_sim[0], y[0]) - np.log(N)
 
 # Run the Particle filter
 for t in tqdm(range(0, T)):

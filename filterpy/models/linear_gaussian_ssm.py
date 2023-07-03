@@ -11,7 +11,7 @@ class TransitionModel():
         """
         Predict the state at time t + 1.
         """
-        return self.mean @ x + np.random.normal(0, np.sqrt(self.cov))
+        return self.mean * x + np.random.normal(0, np.sqrt(self.cov))
 
 
 class MeasurementModel():
@@ -23,13 +23,13 @@ class MeasurementModel():
         """
         Measure the state at time t.
         """
-        return self.mean @ x + np.random.normal(0, np.sqrt(self.cov))
+        return self.mean * x + np.random.normal(0, np.sqrt(self.cov))
 
     def lpdf(self, x, y):
         lpdf = np.zeros(x.shape[0])
 
         for i in range(x.shape[0]):
-            lpdf[i] = stats.multivariate_normal.logpdf(y, self.mean @ x[i], self.cov)
+            lpdf[i] = stats.norm.logpdf(y, loc=self.mean * x[i], scale=self.cov)
 
         return lpdf
 
