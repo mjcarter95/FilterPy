@@ -9,10 +9,10 @@ sns.set_style("whitegrid")
 
 # Hyperparameters
 T = 200
-H = np.array([[1.0]])
-R = np.array([[1.0]])
-F = np.array([[1.0]])
-Q = np.array([[1.0]])
+H = 1.0
+R = 1.0
+F = 1.0
+Q = 1.0
 
 # Instantiate the measurement and observation models
 transition_model = lgssm.TransitionModel(F, Q)
