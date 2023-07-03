@@ -39,6 +39,7 @@ pf = BasicParticleFilter(N, transition_model, measurement_model)
 x_sim = np.zeros((T + 1, N, 1))
 y_sim = np.zeros((T + 1, N, 1))
 logw = np.zeros((T + 1, N))
+log_likelihood = np.zeros((T, N))
 
 # Set the initial state and state covariance
 x_sim[0, :, :] = np.random.multivariate_normal(np.zeros(1), np.eye(1), N)
@@ -49,7 +50,7 @@ logw[0, :] = measurement_model.lpdf(x_sim[0], y[0])
 # Run the Particle filter
 for t in tqdm(range(0, T)):
     x_pred, y_pred = pf.predict(x_sim[t])
-    x_sim[t+1], y_sim[t+1], logw[t+1] = pf.update(x_pred, y_pred, logw[t], y[t])
+    x_sim[t+1], y_sim[t+1], logw[t+1], log_likelihood[t] = pf.update(x_pred, y_pred, logw[t], y[t])
 
 # Estimate the state and observation sequences
 x_hat = np.zeros((T, 1))

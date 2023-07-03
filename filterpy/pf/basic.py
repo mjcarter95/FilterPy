@@ -45,12 +45,11 @@ class BasicParticleFilter(BaseParticleFilter):
         # Compute the weights
         logw_new = logw + self.measurement_model.lpdf(x_pred, y)
 
+        # Calculate the log likelihood
+        log_likelihood = np.max(logw_new) + np.log(np.sum(np.exp(logw_new - np.max(logw_new))))
+
         # Normalise the weights
-        indices = ~np.isneginf(logw)
-        logw[indices] = logw[indices] - np.max(logw[indices])
-        log_likelihood = np.sum(np.exp(logw))
-        weights = np.exp(logw)
-        wn = weights / np.sum(weights)
+        wn = np.exp(logw_new - log_likelihood)
 
         # Compute the effective sample size
         ess = 1 / np.sum(wn ** 2)
@@ -66,7 +65,7 @@ class BasicParticleFilter(BaseParticleFilter):
             x_new = x_pred.copy()
             y_new = y_pred.copy()
 
-        return x_new, y_new, logw_new
+        return x_new, y_new, logw_new, log_likelihood
 
 
 

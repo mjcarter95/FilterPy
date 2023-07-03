@@ -1,4 +1,5 @@
 import numpy as np
+import scipy.stats as stats
 
 
 class TransitionModel():
@@ -28,8 +29,8 @@ class MeasurementModel():
         lpdf = np.zeros(x.shape[0])
 
         for i in range(x.shape[0]):
-            lpdf[i] = -0.5 * np.log(2 * np.pi * self.cov) - 0.5 * (y - self.mean * x[i]) ** 2 / self.cov
-        
+            lpdf[i] = stats.multivariate_normal.logpdf(y, self.mean @ x[i], self.cov)
+
         return lpdf
 
 
