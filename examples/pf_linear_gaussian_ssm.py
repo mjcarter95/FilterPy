@@ -31,10 +31,8 @@ plt.title("Linear Gaussian State Space Model")
 plt.tight_layout()
 plt.savefig("lgssm.png")
 
-# Instantiate the Kalman filter
+# Instantiate the Particle Filter
 N = 2000
-transition_model = lgssm.TransitionModel(3.11747382, Q)
-measurement_model = lgssm.MeasurementModel(-1.47071513, R)
 pf = BasicParticleFilter(N, transition_model, measurement_model)
 
 # Initialise the state and state covariance
